@@ -1,0 +1,21 @@
+#NS File for User Nodes on our network:
+set ns [new Simulator] 
+source tb_compat.tcl 
+
+
+set MICHAEL [$ns node]
+set DEVIN [$ns node] 
+set MOHAMMED [$ns node]  
+set CAM [$ns node] 
+set HONEY [$ns node]
+
+
+set lan0 [$ns make-lan "$MICHAEL $DEVIN $MOHAMMED $CAM" 100Mb 0ms] 
+tb-set-lan-loss $lan0 .02
+tb-set-node-os $MICHAEL Ubuntu1604-STD 
+tb-set-node-os $DEVIN Ubuntu1604-STD 
+tb-set-node-os $MOHAMMED Ubuntu1604-STD 
+tb-set-node-os $CAM Ubuntu1604-STD 
+$ns rtproto Static 
+$ns run 
+

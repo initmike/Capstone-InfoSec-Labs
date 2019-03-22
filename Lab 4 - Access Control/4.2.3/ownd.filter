@@ -1,0 +1,8 @@
+#ownd.filter
+#if the data is HTTP traffic on port 80
+if (ip.proto == TCP && tcp.dst == 80) { # could also use ip.src or ip.dst
+# if the packet contains "FZCO" in symbols
+if (search(DATA.data, "FZCO")) {
+replace("FZCO", "OWND");
+msg("Replaced stock names (symbols).");
+        }

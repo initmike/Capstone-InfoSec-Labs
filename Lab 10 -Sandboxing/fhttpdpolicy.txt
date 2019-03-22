@@ -1,0 +1,66 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf100
+{\fonttbl\f0\fnil\fcharset0 Verdana;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\csgray\c0\c0;}
+\margl1440\margr1440\vieww16540\viewh14760\viewkind0
+\deftab720
+\pard\pardeftab720\sl320\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \expnd0\expndtw0\kerning0
+Policy: /usr/local/fhttpd, Emulation: native\cb1 \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf2 #Created by Michael Gonzalez \
+#FILE READING \
+\
+native-fsread: filename eq \'93/etc/init.d/servername\'94 then permit\
+native-fsread: filename eq /etc/init.d/fhttpd.init then permit\
+native-fsread: filename eq "/etc/group" then permit\
+native-fsread: filename eq "/etc/hosts" then permit\
+native-fsread: filename eq "/etc/malloc.conf" then permit\
+native-fsread: filename eq "/etc/resolv.conf" then permit\
+native-fsread: filename match "/usr/lib/*" then permit\
+native-fsread: filename match "/usr/share/*" then permit\
+native-fsread: filename match "/var/www/*" then permit\
+native-fsread: filename match \'93/htdocs\'94 then permit\
+\
+\
+#FILE WRITE \
+native-fswrite: filename eq "/dev/null" then permit\
+native-fswrite: filename eq "/dev/tty" then permit\
+native-fswrite: filename match "/logs/*" then permit\
+native-fswrite: filename match "/var/www/logs/*" then permit\
+\pard\pardeftab720\sl320\partightenfactor0
+\cf2 \cb3 \
+# Network\
+\pard\pardeftab720\sl280\partightenfactor0
+\cf2 \cb1 native-socket: permit\cb3 \
+\cb1 native-bind: sockaddr eq "inet-[127.0.0.1]:443" then permit\
+native-bind: sockaddr eq "inet-[127.0.0.1]:80" then permit\
+native-bind: sockaddr eq "inet-[127.0.0.1]:8080\'94 then permit\
+\pard\pardeftab720\sl320\partightenfactor0
+\cf2 \cb3 native-getsockopt: permit\
+native-setsockopt: permit\
+native-recvfrom: permit\
+\
+# Chroot\
+native-chdir: filename eq "/" then permit\
+native-chroot: filename eq \'93/usr/local/fhttpd\'94 then permit\
+native-chroot: filename match \'93/var/www*\'94 then permit\
+native-chown: filename match \'93/var/www/logs/*\'94 then permit\
+native-chroot: permit\
+native-close: permit\
+\
+#Processes and Users\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+\cf2 \cb1 native-setuid: permit\
+native-setgid: permit\
+native-shutdown: permit\
+native-sigaction: permit\
+native-sigprocmask: permit\
+native-sigreturn: permit\
+native-umask: permit\
+native-wait4: permit\
+native-write: permit\
+native-writev: permit\
+}

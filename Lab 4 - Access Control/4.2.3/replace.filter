@@ -1,0 +1,7 @@
+if (ip.proto == TCP && tcp.dst == 80) {
+if (search(DATA.data, "$")) {
+replace("$", "$0");
+msg("Replaced stock prices.");
+}
+}
+# end of filtr

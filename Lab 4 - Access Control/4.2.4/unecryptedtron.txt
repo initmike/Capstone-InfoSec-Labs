@@ -1,0 +1,16 @@
+10.1.1.2:443
+HTTP/1.1 200 OK.
+Date: Wed, 10 Oct 2018 11:18:55 GMT
+.
+Server: Apache/2.4.18 (Ubuntu) .
+Transfer-Encoding: chunked.
+Content-Type: text/html.
+.
+4b.
+	564 INT. INNER CHAMBER OF MCP
+	
+564
+
+.
+0.
+.
